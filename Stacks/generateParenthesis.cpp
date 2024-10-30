@@ -39,7 +39,7 @@ private:
 int main()
 {
     Solution sol;
-    vector<string> sols = sol.generateParenthesis(2);
+    vector<string> sols = sol.generateParenthesis(7);
     for (auto it : sols)
     {
         cout << it << endl;

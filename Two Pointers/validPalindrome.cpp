@@ -15,60 +15,39 @@ class Solution
 public:
     bool isPalindrome(string s)
     {
-        // Check Whether the string is empty
-        if (s.empty())
+        int l = 0;
+        int r = s.size() - 1;
+        while (l < r)
         {
-            return true;
-        }
-        // Remove any whitespace and non-alphanumeric characters
-        s.erase(std::remove_if(s.begin(), s.end(),
-                               [](char c)
-                               // Check whether is is a
-                               { return !std::isalnum(c) && !std::isspace(c); }),
-                s.end());
-        // Now convert the string to lowercase
-        std::transform(s.begin(), s.end(), s.begin(),
-                       [](unsigned char c)
-                       { return std::tolower(c); });
+            // Check for whether to skip whitespaces
+            // This function just checks whether it is an integer or an alphabetical number.
 
-        // Two pointers from the front and back
-
-        // Back Pointer:
-        int l = s.size() - 1;
-        char *back = &s[l];
-
-        // Front Pointer:
-        char *front = &s[0];
-
-        while (*back == *front)
-        {
-            cout << "Back: " << *back << endl;
-            cout << "Front: " << *front << endl;
-            back--;
-            front++;
-            if (front > back)
+            while (!isalnum(s[l]) && l < r)
             {
-                return true;
+                // The function takes an a character and transforms it into either a 0 or 1.
+                l++;
             }
+            while (!isalnum(s[r]) && l < r)
+            {
+                r--;
+            }
+            // We need a check whether the words match:
+            if (tolower(s[r]) != tolower(s[l]))
+            {
+                return false;
+            }
+            l++;
+            cout << s[l] << endl;
+            r--;
+            cout << s[r] << endl;
         }
-        return false;
+        return true;
     }
 };
 
-/*
-
-Check if string is empty
-
-Input: s = "Was it a car or a cat I saw?"
-Input: s = "tabacat"
-
-
-Output: true
-
-*/
 int main()
 {
     Solution s;
-    bool f = s.isPalindrome("Was it a car or a cat I saw?");
+    bool f = s.isPalindrome("tab a cat");
     cout << f << endl;
 }
